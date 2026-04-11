@@ -5,6 +5,12 @@
 @section('body_class', '')
 
 @section('content')
+<div class="app-particles-background">
+    <div class="app-particles-background__layer app-particles-background__layer--one"></div>
+    <div class="app-particles-background__layer app-particles-background__layer--two"></div>
+    <div class="app-particles-background__layer app-particles-background__layer--three"></div>
+</div>
+
 <header class="bg-white border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between gap-8">
         <div class="flex items-center gap-3">

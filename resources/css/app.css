@@ -55,6 +55,13 @@
             #fff;
     }
 
+    .app-particles-background--admin {
+        background:
+            radial-gradient(circle at top left, rgba(255, 227, 204, 0.48), transparent 28%),
+            radial-gradient(circle at bottom right, rgba(255, 240, 227, 0.42), transparent 26%),
+            #fffaf6;
+    }
+
     .app-particles-background__layer {
         position: absolute;
         inset: -18%;
@@ -93,6 +100,24 @@
         background-size: 220px 220px, 300px 300px;
         background-position: 60px 10px, 150px 180px;
         animation-duration: 30s;
+    }
+
+    .app-particles-background--admin .app-particles-background__layer--one {
+        background-image:
+            radial-gradient(circle, rgba(249, 115, 22, 0.58) 0 2.5px, transparent 2.9px),
+            radial-gradient(circle, rgba(251, 146, 60, 0.48) 0 2px, transparent 2.4px);
+    }
+
+    .app-particles-background--admin .app-particles-background__layer--two {
+        background-image:
+            radial-gradient(circle, rgba(234, 88, 12, 0.5) 0 2.9px, transparent 3.3px),
+            radial-gradient(circle, rgba(251, 146, 60, 0.4) 0 1.7px, transparent 2.1px);
+    }
+
+    .app-particles-background--admin .app-particles-background__layer--three {
+        background-image:
+            radial-gradient(circle, rgba(249, 115, 22, 0.36) 0 2.1px, transparent 2.5px),
+            radial-gradient(circle, rgba(251, 146, 60, 0.34) 0 2.7px, transparent 3.1px);
     }
 
     .portal-shell,
@@ -289,23 +314,39 @@
         color: #43a65f;
     }
 
-    .portal-admin-link {
-        border: 1px solid #e2d2fb;
-        color: #ffffff;
-        background: #fff;
+    .portal-nav .portal-admin-link {
+        border: 1px solid #ea580c;
+        color: #000000 !important;
+        background: #f8f5ff;
+    }
+
+    .portal-nav .portal-admin-link:hover {
+        border-color: #ea580c;
+        color: #000000 !important;
+        background: #f3edff;
     }
 
     .admin-exit {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 0;
-        border-radius: 0;
-        color: white;
-        font-size: 9px;
-        font-weight: 500;
-        border: 0;
-        background: transparent;
+        padding: 6px 10px;
+        border-radius: 999px;
+        color: rgb(0, 0, 0);
+        font-size: 13px;
+        font-weight: 700;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .admin-exit:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .admin-exit svg {
+        width: 14px;
+        height: 14px;
     }
 
     .portal-content {
@@ -1364,6 +1405,7 @@
     }
 
     .portal-bmi__inputs input,
+    .portal-bmi__inputs textarea,
     .portal-form input,
     .portal-form select {
         width: 100%;
@@ -1376,6 +1418,11 @@
         color: #20263a;
         font-weight: 700;
         outline: none;
+    }
+
+    .portal-bmi__inputs textarea {
+        padding: 12px;
+        resize: vertical;
     }
 
     .portal-form__actions {

@@ -1,9 +1,9 @@
  <?php
 
 use App\Http\Controllers\AdminActionController;
+use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\ComponentsController;
 use App\Http\Controllers\DeployController;
@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store']);
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
-    
+
     // Admin auth (separate)
     Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/admin/login', [AdminAuthController::class, 'login']);
@@ -69,6 +69,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::put('/users/{userExperience}', [AdminActionController::class, 'updateUserExperience'])->name('admin.users.update');
     Route::post('/dietitians', [AdminActionController::class, 'storeDietitian'])->name('admin.dietitians.store');
+    Route::put('/dietitians/{dietitian}', [AdminActionController::class, 'updateDietitian'])->name('admin.dietitians.update');
+    Route::delete('/dietitians/{dietitian}', [AdminActionController::class, 'destroyDietitian'])->name('admin.dietitians.destroy');
     Route::post('/food-items', [AdminActionController::class, 'saveFoodItem'])->name('admin.food-items.store');
     Route::put('/food-items/{foodItem}', [AdminActionController::class, 'saveFoodItem'])->name('admin.food-items.update');
     Route::delete('/food-items/{foodItem}', [AdminActionController::class, 'destroyFoodItem'])->name('admin.food-items.destroy');
@@ -78,6 +80,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/meal-plans/{mealPlan}/items', [AdminActionController::class, 'addMealPlanItem'])->name('admin.meal-plans.items.store');
     Route::delete('/meal-plans/{mealPlan}/items/{mealPlanItem}', [AdminActionController::class, 'destroyMealPlanItem'])->name('admin.meal-plans.items.destroy');
     Route::post('/feedback/{feedbackRequest}/complete', [AdminActionController::class, 'completeFeedback'])->name('admin.feedback.complete');
+    Route::post('/consultations/{consultationRequest}/status', [AdminActionController::class, 'updateConsultationStatus'])->name('admin.consultations.status');
 });
 
 Route::get('/docs', [DocsController::class, 'index'])->name('docs');

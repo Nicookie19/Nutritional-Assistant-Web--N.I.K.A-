@@ -5,6 +5,12 @@
 @section('body_class', '')
 
 @section('content')
+<div class="app-particles-background app-particles-background--admin">
+    <div class="app-particles-background__layer app-particles-background__layer--one" style="background-image: radial-gradient(circle, rgba(249, 115, 22, 0.58) 0 2.5px, transparent 2.9px), radial-gradient(circle, rgba(251, 146, 60, 0.48) 0 2px, transparent 2.4px);"></div>
+    <div class="app-particles-background__layer app-particles-background__layer--two" style="background-image: radial-gradient(circle, rgba(234, 88, 12, 0.5) 0 2.9px, transparent 3.3px), radial-gradient(circle, rgba(251, 146, 60, 0.4) 0 1.7px, transparent 2.1px);"></div>
+    <div class="app-particles-background__layer app-particles-background__layer--three" style="background-image: radial-gradient(circle, rgba(249, 115, 22, 0.36) 0 2.1px, transparent 2.5px), radial-gradient(circle, rgba(251, 146, 60, 0.34) 0 2.7px, transparent 3.1px);"></div>
+</div>
+
 <header class="bg-orange-600 border-b border-orange-700 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex items-center justify-between gap-8">
         <div class="flex items-center gap-3">

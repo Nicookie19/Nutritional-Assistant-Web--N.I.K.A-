@@ -180,7 +180,9 @@
                     </a>
                 @endforeach
 @if (auth()->check() && auth()->user()->is_admin)
-                    <a href="{{ route('admin.dashboard') }}" class="portal-admin-link">Admin</a>
+                    <a href="{{ route('admin.dashboard') }}" class="portal-admin-link" style="color: #111827 !important; background: #ffffff; border-color: #ea580c;">
+                        <span style="color: #000000 !important;">Admin</span>
+                    </a>
                 @endif
                 <form method="POST" action="{{ route('logout') }}" class="ml-4">
                     @csrf
@@ -801,12 +803,6 @@
                             </div>
                         @endif
                         <div class="portal-actions" style="margin-top:18px;">
-                            <form method="POST" action="{{ route('portal.feedback.reply') }}">
-                                @csrf
-                                <input type="hidden" name="title" value="Reply: {{ $item->title }}">
-                                <input type="hidden" name="message" value="Following up on {{ $item->title }}">
-                                <button type="submit" class="portal-button">Reply</button>
-                            </form>
                             @if (! $item->is_read)
                                 <form method="POST" action="{{ route('portal.feedback.read', $item) }}">
                                     @csrf
@@ -814,6 +810,16 @@
                                 </form>
                             @endif
                         </div>
+                        <form method="POST" action="{{ route('portal.feedback.reply') }}" class="portal-bmi__inputs" style="margin-top:18px;">
+                            @csrf
+                            <input type="hidden" name="title" value="Reply: {{ $item->title }}">
+                            <input type="hidden" name="dietitian_id" value="{{ $item->dietitian_id ?? $dietitian?->id }}">
+                            <label style="grid-column: 1 / -1;">
+                                <span>Reply to {{ $item->dietitian?->name ?? ($dietitian?->name ?? 'your dietitian') }}</span>
+                                <textarea name="message" rows="3" placeholder="Type your reply here..." required></textarea>
+                            </label>
+                            <button type="submit" class="portal-button portal-button--primary">Send Reply</button>
+                        </form>
                     </article>
                 @endforeach
             </section>
@@ -855,13 +861,14 @@
                     </div>
                     <form method="POST" action="{{ route('portal.feedback.reply') }}" class="portal-bmi__inputs">
                         @csrf
+                        <input type="hidden" name="dietitian_id" value="{{ $dietitian?->id }}">
                         <label>
                             <span>Title</span>
                             <input type="text" name="title" placeholder="Message title">
                         </label>
-                        <label>
+                        <label style="grid-column: 1 / -1;">
                             <span>Message</span>
-                            <input type="text" name="message" placeholder="Type your message">
+                            <textarea name="message" rows="4" placeholder="Type your message"></textarea>
                         </label>
                         <button type="submit" class="portal-button portal-button--primary">Send Message</button>
                     </form>
