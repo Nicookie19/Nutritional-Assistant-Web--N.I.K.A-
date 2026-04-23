@@ -308,7 +308,35 @@
                                         <td class="text-center font-semibold text-slate-700">{{ $user->foodLogEntries->count() }}</td>
                                         <td><span class="portal-pill {{ $status === 'active' ? 'portal-pill--active' : 'portal-pill--inactive' }}">{{ $status }}</span></td>
                                         <td>
-                                            <a href="{{ route('admin.users', ['edit_user' => $user->id]) }}" class="text-orange-600 font-semibold">Open Hub</a>
+                                            <div style="display:grid;gap:.65rem;">
+                                                <a href="{{ route('admin.users', ['edit_user' => $user->id]) }}" class="text-orange-600 font-semibold">Open Hub</a>
+
+                                                <form method="POST" action="{{ route('admin.users.update', $user) }}" style="display:grid;gap:.45rem;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="full_name" value="{{ $user->full_name }}">
+                                                    <input type="hidden" name="age" value="{{ $user->age }}">
+                                                    <input type="hidden" name="gender" value="{{ $user->gender }}">
+                                                    <input type="hidden" name="activity_level" value="{{ $user->activity_level }}">
+                                                    <input type="hidden" name="primary_goal" value="{{ $user->primary_goal }}">
+                                                    <input type="hidden" name="height_cm" value="{{ $user->height_cm }}">
+                                                    <input type="hidden" name="current_weight_kg" value="{{ $user->current_weight_kg }}">
+                                                    <input type="hidden" name="target_weight_kg" value="{{ $user->target_weight_kg }}">
+
+                                                    <select name="active_dietitian_id" style="min-width:170px;">
+                                                        <option value="">Unassigned</option>
+                                                        @foreach ($dietitians as $dietitian)
+                                                            <option value="{{ $dietitian->id }}" @selected((string) $user->active_dietitian_id === (string) $dietitian->id)>
+                                                                {{ $dietitian->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    <button type="submit" class="portal-button portal-button--ghost" style="padding:6px 10px;font-size:12px;">
+                                                        Assign Dietitian
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

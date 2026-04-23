@@ -76,11 +76,11 @@
         ['label' => 'Zinc', 'value' => '9 mg', 'meta' => '82% of daily goal', 'tone' => 'portal-tone-pink'],
     ];
 
-    $calendarStats = [
-        ['label' => 'Meals Planned', 'value' => $activePlan?->items->count() ? $activePlan->items->count() * 3 : 21, 'tone' => 'portal-tone-green'],
-        ['label' => 'Days Scheduled', 'value' => 7, 'tone' => 'portal-tone-blue'],
-        ['label' => 'Meal Prep Rate', 'value' => '95%', 'tone' => 'portal-tone-orange'],
-        ['label' => 'Avg Daily Calories', 'value' => number_format($activePlan?->daily_calories ?? 2050), 'tone' => 'portal-tone-purple'],
+    $calendarStats = $calendar['stats'] ?? [
+        ['label' => 'Meals Planned', 'value' => 0, 'tone' => 'portal-tone-green'],
+        ['label' => 'Days Scheduled', 'value' => 0, 'tone' => 'portal-tone-blue'],
+        ['label' => 'Meal Prep Rate', 'value' => '0%', 'tone' => 'portal-tone-orange'],
+        ['label' => 'Avg Daily Calories', 'value' => '0', 'tone' => 'portal-tone-purple'],
     ];
 
     $insightHighlights = $insights['insightHighlights'] ?? [
@@ -388,6 +388,18 @@
                             <span>Calories</span>
                             <input type="number" name="calories" min="0" placeholder="248">
                         </label>
+                        <label>
+                            <span>Protein (g)</span>
+                            <input type="number" name="protein" min="0" step="0.1" placeholder="31">
+                        </label>
+                        <label>
+                            <span>Carbs (g)</span>
+                            <input type="number" name="carbs" min="0" step="0.1" placeholder="0">
+                        </label>
+                        <label>
+                            <span>Fat (g)</span>
+                            <input type="number" name="fat" min="0" step="0.1" placeholder="4.5">
+                        </label>
                         <div class="portal-form__actions" style="grid-column:1 / -1;">
                             <button type="submit" class="portal-button portal-button--primary">Add Food</button>
                         </div>
@@ -483,7 +495,7 @@
                         <div class="portal-modal__header">
                             <div>
                                 <h2>Plan Meals for {{ \Illuminate\Support\Carbon::parse($day['date'])->format('F j, Y') }}</h2>
-                                <p>Type each meal manually with food name, grams, and calories.</p>
+                                <p>Type each meal manually with food name, grams, calories, protein, carbs, and fat.</p>
                             </div>
                             <button type="button" data-modal-close>&times;</button>
                         </div>
@@ -502,7 +514,7 @@
                                         <button type="button" class="portal-button portal-button--danger" style="padding:4px 8px;font-size:12px;" onclick="deleteMeal({{ $plannedEntry->id }}, '{{ $mealSlot }}')">Delete meal</button>
                                         @endif
                                     </div>
-                                    <div class="portal-form" style="grid-template-columns:1.3fr .8fr .8fr;">
+                                    <div class="portal-form" style="grid-template-columns:1.3fr repeat(5, minmax(0, .8fr));">
                                         <label>
                                             <span>Food</span>
                                             <input type="text" name="entries[{{ $mealSlot }}][food_name]" value="{{ $plannedEntry?->food_name }}">
@@ -514,6 +526,18 @@
                                         <label>
                                             <span>Calories</span>
                                             <input type="number" min="0" name="entries[{{ $mealSlot }}][calories]" value="{{ $plannedEntry?->calories }}">
+                                        </label>
+                                        <label>
+                                            <span>Protein (g)</span>
+                                            <input type="number" min="0" step="0.1" name="entries[{{ $mealSlot }}][protein]" value="{{ $plannedEntry?->protein }}">
+                                        </label>
+                                        <label>
+                                            <span>Carbs (g)</span>
+                                            <input type="number" min="0" step="0.1" name="entries[{{ $mealSlot }}][carbs]" value="{{ $plannedEntry?->carbs }}">
+                                        </label>
+                                        <label>
+                                            <span>Fat (g)</span>
+                                            <input type="number" min="0" step="0.1" name="entries[{{ $mealSlot }}][fat]" value="{{ $plannedEntry?->fat }}">
                                         </label>
                                     </div>
                                 </div>

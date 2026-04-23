@@ -181,3 +181,5 @@ Guest portal pages | - Unauth. | 1. Direct to /food-log, /profile etc. | N/A | A
 User admin pages | - Logged user. | 1. /admin/* pages | N/A | 403 Forbidden. | PASS: EnsureUserIsAdmin middleware. | Pass
 Public pages access | - Any role. | 1. /docs /components etc. | N/A | 200 for all roles. | PASS: DocsController etc. no auth required. | Pass
 Logout | - Logged in. | 1. Click Logout | N/A | Redirect login, session cleared. | PASS: Logout form POST /logout Auth::logout(). | Pass
+
+# Test Case Completed
